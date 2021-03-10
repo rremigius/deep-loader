@@ -1,6 +1,6 @@
 {
   "name": "deep-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple class to keep track of multiple (nested) loading tasks.",
   "main": "index.js",
   "scripts": {
