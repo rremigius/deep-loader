@@ -4,9 +4,16 @@
   "description": "A simple class to keep track of multiple (nested) loading tasks.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r esm -r ts-node/register **/*spec.ts",
+    "build": "tsc"
   },
   "keywords": ["loading", "promises", "promise", "tasks"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rremigius/deep-loader"
+  },
+  "homepage": "https://github.com/rremigius/deep-loader",
+  "bugs": "https://github.com/rremigius/deep-loader#issues",
   "author": "Remi Alkemade <info@remialkemade.nl> (https://www.remialkemade.nl)",
   "license": "ISC",
   "dependencies": {
