@@ -1,0 +1,20 @@
+{
+  "name": "deep-loader",
+  "version": "0.0.1",
+  "description": "A simple class to keep track of multiple (nested) loading tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["loading", "promises", "promise", "tasks"],
+  "author": "Remi Alkemade <info@remialkemade.nl> (https://www.remialkemade.nl)",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "chai": "^4.3.3",
+    "event-interface-mixin": "0.0.6",
+    "log-control": "0.0.2",
+    "mocha": "^8.3.1"
+  }
+}
