@@ -1,8 +1,8 @@
 {
   "name": "deep-loader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple class to keep track of multiple (nested) loading tasks.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r esm -r ts-node/register **/*spec.ts",
     "build": "tsc"
