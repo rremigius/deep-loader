@@ -27,6 +27,8 @@ export default class Loader {
 	private readonly _fire:FireMethod;
 	public readonly on:OnMethod;
 
+	public log:Log;
+
 	constructor(name?:string) {
 		this._name = name || 'Loading';
 		this.resetFinalPromise();
@@ -34,6 +36,8 @@ export default class Loader {
 		this._events = new EventInterface();
 		this.on = this._events.getOnMethod();
 		this._fire = this._events.getFireMethod();
+
+		this.log = log.instance(this._name);
 	}
 
 	private resetFinalPromise() {
@@ -73,7 +77,7 @@ export default class Loader {
 			this._finalPromise.reject(error);
 			this._fire(ErrorEvent, error);
 		} else {
-			log.log(this._name +": finished loading all tasks.");
+			this.log.log(this._name +": finished loading all tasks.");
 			this._finalPromise.resolve(this._loaded);
 			this._fire(FinishEvent, this._loaded);
 		}
@@ -100,7 +104,7 @@ export default class Loader {
 
 	start(name = defaultTask, timeout?:number, promise?:Promise<unknown>) {
 		this._isFinished = false;
-		log.log(this._name +": started loading: ", name);
+		this.log.log(this._name +": started loading: ", name);
 
 		let loadingPromise = new Promise( (resolve, reject) => {
 
@@ -129,7 +133,7 @@ export default class Loader {
 			}
 		});
 		loadingPromise.catch((err)=>{
-			log.error(this._name +": failed loading: ", name, err);
+			this.log.error(this._name +": failed loading: ", name, err);
 			this._lastError = err;
 			this._errors[name] = err;
 		});  // we don't care about the promise here, but we need to catch it anyway
@@ -171,7 +175,7 @@ export default class Loader {
 
 	finish(name = defaultTask, result?:unknown) {
 		if(this.isFinished(name)) return;
-		log.log(this._name +": finished loading: ", name);
+		this.log.log(this._name +": finished loading: ", name);
 
 		this._loaded[name] = result;
 		if(name in this._promises) {
