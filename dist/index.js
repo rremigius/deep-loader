@@ -51,6 +51,7 @@ class Loader {
         this._events = new event_interface_mixin_1.default();
         this.on = this._events.getOnMethod();
         this._fire = this._events.getFireMethod();
+        this.log = log.instance(this._name);
     }
     resetFinalPromise() {
         const promise = new Promise((resolve, reject) => {
@@ -87,7 +88,7 @@ class Loader {
             this._fire(ErrorEvent, error);
         }
         else {
-            log.log(this._name + ": finished loading all tasks.");
+            this.log.log(this._name + ": finished loading all tasks.");
             this._finalPromise.resolve(this._loaded);
             this._fire(FinishEvent, this._loaded);
         }
@@ -109,7 +110,7 @@ class Loader {
     }
     start(name = defaultTask, timeout, promise) {
         this._isFinished = false;
-        log.log(this._name + ": started loading: ", name);
+        this.log.log(this._name + ": started loading: ", name);
         let loadingPromise = new Promise((resolve, reject) => {
             // Store reject/resolve methods outside of Promise
             this._promises[name] = {
@@ -134,7 +135,7 @@ class Loader {
             }
         });
         loadingPromise.catch((err) => {
-            log.error(this._name + ": failed loading: ", name, err);
+            this.log.error(this._name + ": failed loading: ", name, err);
             this._lastError = err;
             this._errors[name] = err;
         }); // we don't care about the promise here, but we need to catch it anyway
@@ -171,7 +172,7 @@ class Loader {
     finish(name = defaultTask, result) {
         if (this.isFinished(name))
             return;
-        log.log(this._name + ": finished loading: ", name);
+        this.log.log(this._name + ": finished loading: ", name);
         this._loaded[name] = result;
         if (name in this._promises) {
             this._promises[name].resolve(result);

@@ -1,4 +1,5 @@
 import { Event, OnMethod } from "event-interface-mixin";
+import Log from "log-control";
 declare type PromiseHandler = {
     resolve: (value?: unknown) => void;
     reject: (err: Error) => void;
@@ -22,6 +23,7 @@ export default class Loader {
     private _isFinished;
     private readonly _fire;
     readonly on: OnMethod;
+    log: Log;
     constructor(name?: string);
     private resetFinalPromise;
     private firstLoad;
